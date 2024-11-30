@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/yamldoc-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/yamldoc-{{ version }}.tar.gz
   sha256: eb169566e8c1cf732b37b15537af05ce84df37372cdf496986501aa532b7d273
 
 build:
@@ -14,14 +14,14 @@ build:
     - yamldoc = yamldoc:cli
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -31,6 +31,7 @@ test:
     - yamldoc --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/Chris1221/yamldoc
